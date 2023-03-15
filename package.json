@@ -1,0 +1,23 @@
+{
+  "name": "banner",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Igor",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "start": "webpack serve --open",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.3",
+    "style-loader": "^3.3.2",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.12.0"
+  }
+}
