@@ -1,53 +1,84 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+
+const mode = process.env.NODE_ENV || 'development';
+const devMode = mode === 'development';
+const target = devMode ? 'web' : 'browserslist';
+const devtool = devMode ? 'source-map' : undefined;
 
 module.exports = {
-  mode: 'development',
-  entry: './src/index.js',
+  mode,
+  target,
+  devtool,
+  devServer: {
+    port: 3000,
+    open: true,
+    hot: true,
+  },
+  entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
+    clean: true,
+    filename: '[name].[contenthash].js',
+    assetModuleFilename: 'assets/[name][ext]',
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src', 'index.html'),
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+  ],
   module: {
     rules: [
       {
-        test: /\.html$/,
+        test: /\.html$/i,
+        loader: 'html-loader',
+      },
+      {
+        test: /\.(c|sa|sc)ss$/i,
         use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
           {
-            loader: 'html-loader',
-            options: { minimize: false },
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [require('postcss-preset-env')],
+              },
+            },
+          },
+          'group-css-media-queries-loader',
+          {
+            loader: 'resolve-url-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
           },
         ],
       },
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+        test: /\.woff2?$/i,
         type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
       },
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader,'style-loader', 'css-loader'],
+        test: /\.m?js$/i,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
     ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
-    }),
-    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: 'public',
-          noErrorOnMissing: true,
-        },
-      ],
-    }),
-  ],
-  devServer: {
-    open: true,
-    port: 3000,
   },
 };

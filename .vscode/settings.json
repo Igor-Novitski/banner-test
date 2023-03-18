@@ -1,0 +1,4 @@
+{
+  "html.autoCreateQuotes": true,
+  "prettier.singleQuote": true
+}
