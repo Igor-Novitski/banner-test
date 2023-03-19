@@ -60,6 +60,8 @@ if (str.indexOf('lang=') > 0) {
     subSrt === 'zh'
   ) {
     lang = subSrt;
+  } else {
+    lang = 'en';
   }
 }
 
