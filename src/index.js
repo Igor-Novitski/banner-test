@@ -39,7 +39,15 @@ button.addEventListener('click', followTheLink);
 //lang
 
 const str = window.location.href;
-let lang = window.navigator.language;
+
+let lang = (
+  window.navigator.language ||
+  window.navigator.systemLanguage ||
+  window.navigator.userLanguage
+)
+  .substr(0, 2)
+  .toLowerCase();
+
 if (str.indexOf('lang=') > 0) {
   let subSrt = str.slice(str.indexOf('lang=') + 5, str.indexOf('lang=') + 8);
   if (
@@ -64,6 +72,7 @@ const i18Obj = {
   ru: ruLang,
   zh: zhLang,
 };
+
 function getTranslate(lang) {
   const elements = document.querySelectorAll('[data-i18]');
   elements.forEach((item) => {
