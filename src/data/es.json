@@ -4,16 +4,19 @@
   "Count mode": "Modo de recuento",
   "Text recognition (OCR)": "Reconocimiento de texto (OCR)",
   "Monthly": "Mensual",
-  "<strong>{{price}}</strong><br>per month": "<strong>{{price}}</strong><br>por mes",
+  "<strong>{{price}}</strong><br>per month": "<strong>$9.99</strong>",
+  "per month": "por mes",
   "3 DAYS FREE": "3 DÍAS GRATIS",
-  "{{price}}/month": "{{price}}/mes",
+  "{{price}}/month": "$9.99 mes",
+  "{{price}}month": "$1.66 mes",
   "Annually": "Anual",
   "-83%": "-83%",
-  "<strong>{{price}}</strong><br>per year": "<strong>{{price}}</strong><br>por año",
+  "<strong>{{price}}</strong><br>per year": "<strong>$19.99</strong>",
+  "per year": "por año",
   "MOST POPULAR": "LO MÁS PEDIDO",
   "Continue": "Continuar",
   "Auto-renewable. Cancel anytime.": "Renovable automáticamente. Cancela cuando quieras.",
   "Terms of Use": "Términos de uso",
   "Restore": "Restablecer",
-  "Privacy Policy": "Política de privacidad"  
+  "Privacy Policy": "Política de privacidad"
 }
